@@ -1,0 +1,58 @@
+<h2>{{selectedSurvey.title}}</h2>
+<div class="jumbotron" ng-show="!showSurvey">
+    <p>{{survey.description}}</p>
+    <p><a class="btn btn-lg btn-success" ng-click="showSurvey = true">Start Survey</a></p>
+</div>
+<div ng-show="showSurvey">
+        <div ng-show="!surveySubmitted">
+
+            <form role="form">
+                <div ng-repeat="question in selectedSurvey.questions">
+                        <div class="form-group">
+                            <label>
+                                    {{question.text}}
+                                    <div class="{{question.type}}" ng-show="question.type == 'number'">
+                                            <input type="number" ng-model="question.response" >
+                                    </div>
+
+                                    <div class="{{question.type}}" ng-show="question.type == 'yesno'">
+                                            <input type="radio" ng-model="question.response" value="true" /> Yes
+                                            <input type="radio" ng-model="question.response" value="false" /> No
+                                    </div>
+
+                                    <div class="{{question.type}}" ng-show="question.type == 'simpletext'">
+
+                                        <input type="text" id="{{selectedSurvey.id}}_{{question.id}}" ng-model="question.response" />
+
+                                    </div>
+
+                                    <div class="{{question.type}}" ng-show="question.type == 'singlechoice'">
+                                        <div class="radio" ng-repeat="option in question.options">
+                                            <label> {{option}}
+                                                <input type="radio" ng-model="question.response" value="{{option}}">
+                                            </label>
+                                        </div>
+                                    </div>
+                        </label>
+                        </div>
+                </div>
+
+
+                <p><a class="btn btn-sml btn-success" ng-click="submitSurveyResponses()">Submit Survey</a></p>
+            </form>
+
+        </div>
+
+        <div class="jumbotron" ng-show="surveySubmitted">
+            <h2>Thank You!</h2>
+            <h3>Your Survey Responses</h3>
+            <div ng-repeat="question in selectedSurvey.questions" ng-show="question.response !== undefined">
+                <p class="text-left"><strong>Q:</strong> {{question.text}}</p>
+                <p class="text-left"><strong>A:</strong> {{question.response}}</p>
+                <hr />
+            </div>
+            <p><a class="btn btn-sml btn-success" ng-click="resetSurvey()">Submit Another Survey</a></p>
+        </div>
+
+</div>
+

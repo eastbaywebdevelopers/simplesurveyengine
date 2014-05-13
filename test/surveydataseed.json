@@ -1,0 +1,67 @@
+{
+    "surveys": [
+                    {
+                        "id": "s1",
+                        "title": "Sample Survey",
+                        "category": "Sample Category",
+                        "description": "This is a sample survey that has a set of random useless questions.",
+                        "questions": [
+                            {
+                                "id": "q1",
+                                "text": "What color is your car?",
+                                "type": "simpletext",
+                                "required": true,
+                                "response": "undefined"
+                            },
+                            {
+                                "id": "q2",
+                                "text": "How old is your cat?",
+                                "type": "number",
+                                "required": true,
+                                "response": "undefined"
+                            },
+                            {
+                                "id": "q3",
+                                "text": "What is your favorite color?",
+                                "type": "singlechoice",
+                                "required": false,
+                                 "optionText": "Blue,Yellow,Green",
+                                "options": ["Blue", "Yellow", "Green"],
+                                "response": "undefined"
+                            }
+                        ]
+                },
+                {
+                        "id": "s2",
+                        "title": "Another Sample Survey",
+                        "category": "Another Sample Category",
+                        "description": "This is another sample survey that has a set of random useless questions.",
+                        "questions": [
+                            {
+                                "id": "q1",
+                                "text": "What color is your hat?",
+                                "type": "simpletext",
+                                "required": true,
+                                "response": "undefined"
+                            },
+                            {
+                                "id": "q2",
+                                "text": "How old is your child?",
+                                "type": "number",
+                                "required": true,
+                                "response": "undefined"
+                            },
+                            {
+                                "id": "q3",
+                                "text": "What is your favorite color?",
+                                "type": "singlechoice",
+                                "required": false,
+                                "optionText": "Blue,Yellow,Green",
+                                "options": ["Blue", "Yellow", "Green"],
+                                "response": "undefined"
+                            }
+                        ]
+                }
+        ]
+
+}

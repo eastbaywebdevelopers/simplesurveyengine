@@ -1,0 +1,97 @@
+
+<div class="row">
+ <!--survey list-->
+    <div class="col-lg-12">
+            <h2>Surveys</h2>
+            <p id="loading" ng-if="!surveysLoaded">Loading...</p>
+            <div ng-if="surveysLoaded">
+            <table class="table">
+                <thead>
+                    <th>Survey Title</th>
+                    <th>Number of Questions</th>
+                    <th>Number of Submittals</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(id,survey) in surveys">
+                         <td>{{survey.title}}</td>
+                        <td class="text-center col-md-2">{{survey.questions.length}}</td>
+                        <td class="text-center col-md-2" >{{survey.submitCount}}</td>
+                        <td>
+                            <button class="btn btn-sml btn-success" ng-click="editSurvey(id)">Edit</button>
+                            <button class="btn btn-sml btn-danger" ng-click="removeSurvey(id)">Remove</button>
+                            <a href="/#/survey/submit/{{id}}">Take Survey</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a class="btn btn-lrg btn-success" ng-click="newSurvey()">Create New Survey</a>
+        </div>
+    </div>
+    <!--//survey list-->
+
+<!--
+
+    <div class="col-lg-12" ng-if="editing">
+
+                <h3>{{selectedSurvey.title}}</h3>
+                <form role="form">
+                    <div class='form-group'>
+                        <label>Title:</label>
+                        <input type="text" ng-model="selectedSurvey.title" class="form-control" />
+                    </div>
+                    <div class='form-group'>
+                        <label>Description:</label>
+                        <textarea ng-model="selectedSurvey.description" class="form-control" rows="3" />
+                        </textarea>
+                    </div>
+                    <h4>Questions</h4>
+                    <table class="table">
+                            <thead>
+                                <th>Text</th>
+                                <th>Type</th>
+                                <th>Choices</th>
+                                <th>&nbsp;</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="question in selectedSurvey.questions">
+                                        <td><input type="text" ng-model="question.text"  class="form-control" /></td>
+                                        <td>
+                                            <select ng-model="question.type" ng-change="resetOptions(question)" class="form-control">
+                                                <option value="yesno">Yes / No </option>
+                                                <option value="number">Number </option>
+                                                <option value="simpletext">Simple Text</option>
+                                                <option value="singlechoice">Single Choice</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="text" ng-model="question.options"  ng-list ng-show="question.type == 'singlechoice'" class="form-control" /></td>
+                                        <td><button class="btn btn-sml btn-danger" ng-click="removeQuestion($index)">Remove</button></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" ng-model="newQuestion.text" class="form-control" /></td>
+                                        <td>
+                                            <select ng-model="newQuestion.type" ng-change="resetOptions(newQuestion)" class="form-control">
+                                                <option value="yesno">Yes / No </option>
+                                                <option value="number">Number </option>
+                                                <option value="simpletext">Simple Text</option>
+                                                <option value="singlechoice">Single Choice</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="text" ng-model="newQuestion.options"  ng-list ng-show="newQuestion.type == 'singlechoice'" class="form-control" /></td>
+                                        <td><button class="btn btn-sml btn-success" ng-click="addQuestion()">Add</button></td>
+                                </tr>
+                            </tbody>
+                    </table>
+
+                        <button class="btn btn-sml btn-success" ng-click="saveSurvey()">Update Survey</button>
+                        <button class="btn btn-sml btn-warning" ng-click="cancelSurveyUpdate()">Cancel</button>
+
+
+            </form>
+
+    </div>
+
+-->
+</div>
+
