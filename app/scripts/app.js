@@ -31,6 +31,6 @@ var simpleSurveyEngineApp = angular
         controller: 'SurveyCreateEditCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/surveymanagement'
       });
   });
