@@ -1,13 +1,13 @@
-simpleSurveyEngineApp.controller('SurveyCreateEditCtrl', ['$scope', '$log', '$location', '$route', 'survey', function($scope, $log, $location, $route, surveySvc) {
+simpleSurveyEngineApp.controller('SurveyCreateEditCtrl', ['$scope', '$log', '$location', '$route', 'survey', function($scope, $log, $location, $route, surveyMgr) {
 
     if($route.current.params['action'] === 'create') {
-        $scope.selectedSurvey = surveySvc.newSurvey();
+        $scope.selectedSurvey = surveyMgr.newSurvey();
     }
     else if ($route.current.params['action'] === 'edit') {
-        surveySvc.getSurvey($scope, $route.current.params['id']);
+        surveyMgr.getSurvey($scope, $route.current.params['id']);
     }
 
-    $scope.newQuestion = surveySvc.newQuestion();
+    $scope.newQuestion = surveyMgr.newQuestion();
 
     $scope.cancelSurveyUpdate = function() {
             $location.path('/surveymanagement');
@@ -15,20 +15,20 @@ simpleSurveyEngineApp.controller('SurveyCreateEditCtrl', ['$scope', '$log', '$lo
 
     $scope.addQuestion = function() {
             if($scope.newQuestion !== undefined) {
-                surveySvc.addQuestion(angular.copy($scope.newQuestion), $scope.selectedSurvey.questions);
-                $scope.newQuestion = surveySvc.newQuestion();
+                surveyMgr.addQuestion(angular.copy($scope.newQuestion), $scope.selectedSurvey.questions);
+                $scope.newQuestion = surveyMgr.newQuestion();
             }
     };
 
     $scope.removeQuestion = function(index) {
-                surveySvc.removeQuestion(index, $scope.selectedSurvey.questions);
+                surveyMgr.removeQuestion(index, $scope.selectedSurvey.questions);
     };
 
     $scope.saveSurvey = function(id) {
                 //$log.info($scope.selectedSurvey);
-                surveySvc.updateSurvey($scope.selectedSurvey);
+                surveyMgr.updateSurvey($scope.selectedSurvey);
                 $scope.selectedSurvey = undefined;
-                $scope.newQuestion = surveySvc.newQuestion();
+                $scope.newQuestion = surveyMgr.newQuestion();
                 $location.path('/surveymanagement');
     };
 

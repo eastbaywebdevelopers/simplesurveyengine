@@ -1,9 +1,9 @@
-simpleSurveyEngineApp.controller('SurveyManagementCtrl', ['$scope', '$location','survey', function($scope, $location, surveySvc) {
+simpleSurveyEngineApp.controller('SurveyManagementCtrl', ['$scope', '$location','survey', function($scope, $location, surveyMgr) {
 
         $scope.surveysLoaded = false;
 
         $scope.surveys = [];
-        surveySvc.setSurveysToScope($scope);
+        surveyMgr.setSurveysToScope($scope);
 
         $scope.newSurvey = function() {
                 $location.path('/survey/create');
@@ -14,7 +14,7 @@ simpleSurveyEngineApp.controller('SurveyManagementCtrl', ['$scope', '$location',
         };
 
         $scope.removeSurvey = function(key) {
-                surveySvc.removeSurvey(key);
+                surveyMgr.removeSurvey(key);
         };
 
   }]);

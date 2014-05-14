@@ -1,4 +1,4 @@
-simpleSurveyEngineApp.controller('SurveySubmitCtrl', ['$scope', '$log', '$route', 'survey', function($scope, $log, $route, surveySvc) {
+simpleSurveyEngineApp.controller('SurveySubmitCtrl', ['$scope', '$log', '$route', 'survey', function($scope, $log, $route, surveyMgr) {
 
         $scope.resetSurvey = function() {
 
@@ -17,13 +17,13 @@ simpleSurveyEngineApp.controller('SurveySubmitCtrl', ['$scope', '$log', '$route'
                         responses.push({"qid": $scope.selectedSurvey.questions[i].id, "response": $scope.selectedSurvey.questions[i].response});
                 }
 
-                surveySvc.saveSurveyResponses($scope.selectedSurvey, responses);
+                surveyMgr.saveSurveyResponses($scope.selectedSurvey, responses);
 
                 $scope.surveySubmitted = true;
 
         };
 
-         surveySvc.getSurvey($scope, $route.current.params['id']);
+         surveyMgr.getSurvey($scope, $route.current.params['id']);
 
         $scope.showSurvey = false;
         $scope.surveySubmitted = false;
