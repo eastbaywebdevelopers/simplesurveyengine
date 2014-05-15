@@ -28,7 +28,7 @@
                                                 <option value="singlechoice">Single Choice</option>
                                             </select>
                                         </td>
-                                        <td><input type="text" ng-model="question.options"  ng-list ng-show="question.type == 'singlechoice'" class="form-control" /></td>
+                                        <td><input type="text" ng-model="question.options"  ng-list ng-show="question.type === 'singlechoice'" class="form-control" /></td>
                                         <td><button class="btn btn-sml btn-danger" ng-click="removeQuestion($index)">Remove</button></td>
                                 </tr>
                                 <tr>
@@ -41,7 +41,7 @@
                                                 <option value="singlechoice">Single Choice</option>
                                             </select>
                                         </td>
-                                        <td><input type="text" ng-model="newQuestion.options"  ng-list ng-show="newQuestion.type == 'singlechoice'" class="form-control" /></td>
+                                        <td><input type="text" ng-model="newQuestion.options"  ng-list ng-show="newQuestion.type === 'singlechoice'" class="form-control" /></td>
                                         <td><button class="btn btn-sml btn-success" ng-click="addQuestion()">Add</button></td>
                                 </tr>
                             </tbody>

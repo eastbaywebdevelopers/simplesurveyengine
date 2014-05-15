@@ -11,22 +11,22 @@
                         <div class="form-group">
                             <label>
                                     {{question.text}}
-                                    <div class="{{question.type}}" ng-show="question.type == 'number'">
-                                            <input type="number" ng-model="question.response" >
+                                    <div class="{{question.type}}" ng-if="question.type === 'number'">
+                                            <input type="number" id="{{selectedSurvey.id}}_{{question.id}}" ng-model="question.response" >
                                     </div>
 
-                                    <div class="{{question.type}}" ng-show="question.type == 'yesno'">
+                                    <div class="{{question.type}}" ng-if="question.type === 'yesno'">
                                             <input type="radio" ng-model="question.response" value="true" /> Yes
                                             <input type="radio" ng-model="question.response" value="false" /> No
                                     </div>
 
-                                    <div class="{{question.type}}" ng-show="question.type == 'simpletext'">
+                                    <div class="{{question.type}}" ng-if="question.type === 'simpletext'">
 
                                         <input type="text" id="{{selectedSurvey.id}}_{{question.id}}" ng-model="question.response" />
 
                                     </div>
 
-                                    <div class="{{question.type}}" ng-show="question.type == 'singlechoice'">
+                                    <div class="{{question.type}}" ng-if="question.type === 'singlechoice'">
                                         <div class="radio" ng-repeat="option in question.options">
                                             <label> {{option}}
                                                 <input type="radio" ng-model="question.response" value="{{option}}">
