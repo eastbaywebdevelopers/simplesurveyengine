@@ -2,8 +2,11 @@ simpleSurveyEngineApp.controller('SurveyManagementCtrl', ['$scope', '$location',
 
         $scope.surveysLoaded = false;
 
-        $scope.surveys = [];
-        surveyMgr.setSurveysToScope($scope);
+        $scope.surveys = surveyMgr.getSurveys();
+
+        $scope.surveys.$on('loaded', function() {
+                $scope.surveysLoaded = true;
+        });
 
         $scope.newSurvey = function() {
                 $location.path('/survey/create');

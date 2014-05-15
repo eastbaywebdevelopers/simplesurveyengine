@@ -1,10 +1,12 @@
 simpleSurveyEngineApp.factory('survey', function($firebase) {
 
-    var surveyUrl = "https://eastbaydevmeetup.firebaseio.com/surveys/";
-    var surveyRef = new Firebase(surveyUrl);
+    var surveyDomain = "https://eastbaydevmeetup.firebaseio.com";
+
+    var surveyUrl = surveyDomain + "/surveys/";
+
 
     /**
-     * Generates a guid value
+     * Generates a guid value (this function normally would be put into a util lib of some kind, but it's placed here to keep things simple)
      * @private
      */
     var guid = (function() {
@@ -35,7 +37,7 @@ simpleSurveyEngineApp.factory('survey', function($firebase) {
      */
     var incrementSurveySubmittalCount = function(id) {
 
-        var countRef = new Firebase("https://eastbaydevmeetup.firebaseio.com/surveys/" + id + '/submitCount');
+        var countRef = new Firebase(surveyUrl  + id + '/submitCount');
         countRef.transaction(function(current_value) {
           return current_value + 1;
         });
@@ -103,7 +105,7 @@ simpleSurveyEngineApp.factory('survey', function($firebase) {
      * @public
      */
     var addSurvey = function(survey) {
-        survey.id = guid(); //id is obsolete now that surveys are in Firebase
+        survey.id = guid();
         surveys.push(survey);
     };
 
@@ -120,7 +122,7 @@ simpleSurveyEngineApp.factory('survey', function($firebase) {
         }
             if(!survey.id) {
                     var surveys = new Firebase(surveyUrl);
-                    survey.id = guid();  //id is obsolete now that surveys are in Firebase
+                    survey.id = guid();
                     surveys.push(survey);
             } else {
                     var ref = new Firebase(surveyUrl);
@@ -144,8 +146,8 @@ simpleSurveyEngineApp.factory('survey', function($firebase) {
      * @param {string} id The survey ID.
      * @public
      */
-    var getSurvey = function(scope, id) {
-        scope.selectedSurvey = getSurveyFromDb(id);
+    var getSurvey = function(id) {
+        return getSurveyFromDb(id);
     };
 
     /**
@@ -153,12 +155,9 @@ simpleSurveyEngineApp.factory('survey', function($firebase) {
      * @param {object} scope Scope of the controller making the call
      * @public
      */
-    var setSurveysToScope = function(scope) {
-            scope.surveys = $firebase(surveyRef);
-
-            scope.surveys.$on('loaded', function() {
-                scope.surveysLoaded = true;
-            });
+    var getSurveys = function() {
+            var surveyRef = new Firebase(surveyUrl);
+            return $firebase(surveyRef);
     };
 
     /**
@@ -168,7 +167,7 @@ simpleSurveyEngineApp.factory('survey', function($firebase) {
      * @public
      */
     var saveSurveyResponses = function(survey, responses) {
-            var surveyResponseUrl = "https://eastbaydevmeetup.firebaseio.com/surveyresponses/";
+            var surveyResponseUrl = surveyDomain + "/surveyresponses/";
             var surveyResponses = new Firebase(surveyResponseUrl);
             surveyResponses.push(responses);
             incrementSurveySubmittalCount(survey.$id);
@@ -176,13 +175,13 @@ simpleSurveyEngineApp.factory('survey', function($firebase) {
 
     return {
         getSurvey: getSurvey,
+        getSurveys: getSurveys,
         updateSurvey: updateSurvey,
         removeSurvey: removeSurvey,
         newSurvey: newSurvey,
         newQuestion: newQuestion,
         addQuestion: addQuestion,
         removeQuestion: removeQuestion,
-        setSurveysToScope: setSurveysToScope,
         saveSurveyResponses: saveSurveyResponses
     };
 

@@ -23,7 +23,7 @@ simpleSurveyEngineApp.controller('SurveySubmitCtrl', ['$scope', '$log', '$route'
 
         };
 
-         surveyMgr.getSurvey($scope, $route.current.params['id']);
+        $scope.selectedSurvey = surveyMgr.getSurvey($route.current.params['id']);
 
         $scope.showSurvey = false;
         $scope.surveySubmitted = false;

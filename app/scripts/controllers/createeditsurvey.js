@@ -4,7 +4,7 @@ simpleSurveyEngineApp.controller('SurveyCreateEditCtrl', ['$scope', '$log', '$lo
         $scope.selectedSurvey = surveyMgr.newSurvey();
     }
     else if ($route.current.params['action'] === 'edit') {
-        surveyMgr.getSurvey($scope, $route.current.params['id']);
+        $scope.selectedSurvey = surveyMgr.getSurvey($route.current.params['id']);
     }
 
     $scope.newQuestion = surveyMgr.newQuestion();
